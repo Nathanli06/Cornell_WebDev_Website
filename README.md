@@ -12,8 +12,6 @@ photography, and a sharp-edged, single-accent visual language defined in
 - Tailwind CSS v4 (theme tokens in `app/globals.css`)
 - [Framer Motion](https://motion.dev) for scroll-in reveals and menu/nav motion
 - [Radix UI](https://radix-ui.com) primitives (accordion) for accessibility
-- [Lucide](https://lucide.dev) icons, plus a few hand-rolled brand marks
-  (GitHub, Instagram, LinkedIn, company logos) since lucide dropped brand glyphs
 
 ## Getting started
 
