@@ -39,3 +39,24 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# editors / IDEs (per-developer, not shared)
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+Thumbs.db
+ehthumbs.db
+
+# AI assistant / agent tooling (local settings and session data, not shared)
+.claude/
+.cursor/
+.windsurf/
+.aider*
+CLAUDE.local.md
+
+# logs
+*.log

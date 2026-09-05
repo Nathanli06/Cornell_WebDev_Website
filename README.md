@@ -1,36 +1,77 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Cornell WebDev — Website v2
 
-## Getting Started
+The public site for Cornell WebDev: who we are, what we've built, who's on
+the team, and how to apply. Editorial-leaning design system (Zilla Slab
+display type paired with Geist sans/mono), real member and project
+photography, and a sharp-edged, single-accent visual language defined in
+[`app/globals.css`](app/globals.css).
 
-First, run the development server:
+## Stack
+
+- [Next.js](https://nextjs.org) 16 (App Router) + TypeScript
+- Tailwind CSS v4 (theme tokens in `app/globals.css`)
+- [Framer Motion](https://motion.dev) for scroll-in reveals and menu/nav motion
+- [Radix UI](https://radix-ui.com) primitives (accordion) for accessibility
+- [Lucide](https://lucide.dev) icons, plus a few hand-rolled brand marks
+  (GitHub, Instagram, LinkedIn, company logos) since lucide dropped brand glyphs
+
+## Getting started
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm run lint    # ESLint
+npm run build   # production build
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Project structure
 
-## Learn More
+```
+app/
+  page.tsx              Home
+  members/page.tsx      Members (E-Board, members, alumni)
+  projects/page.tsx     Projects (shipped + in development)
+  recruitment/page.tsx  Recruitment (timeline, FAQ)
+  not-found.tsx, sitemap.ts
 
-To learn more about Next.js, take a look at the following resources:
+components/
+  layout/     Header, Footer
+  ui/         Reusable primitives: Button, TextLink, Accordion, Reveal,
+              PageHero, ProjectCard, MemberCard, Timeline, LogoMarquee,
+              ImagePlaceholder, company/social icon sets
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+lib/
+  data/       Editable content as plain TypeScript: nav, projects, members,
+              timeline, faqs, placements (companies members have worked at)
+  use-reduced-motion.ts, utils.ts
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+public/assets/
+  logo*.png       Brand marks
+  members/        Individual member headshots
+  projects/       Real project screenshots
+  team/           Group/team photography
+```
 
-## Deploy on Vercel
+## Content
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Copy and structured content (projects, members, FAQs, recruitment timeline,
+company placements) live in `lib/data/` as plain TypeScript objects, so they
+can be edited without touching page markup or component code.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Images
+
+Real photos are preferred everywhere. [`ImagePlaceholder`](components/ui/image-placeholder.tsx)
+is the fallback for anyone or anything without a real asset yet (a labeled,
+dashed box) — swap it for a real image once one exists.
+
+## What's intentionally not committed
+
+See `.gitignore`: build output, `node_modules`, env files, OS/editor
+cruft, and local AI-assistant config/session files. Don't
+commit secrets, API keys, or `.env*` files; use your deployment platform's
+environment variable settings instead.

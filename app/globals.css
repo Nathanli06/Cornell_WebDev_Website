@@ -1,26 +1,150 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Neutral palette, matched to the club's actual logo (cool grays,
+     not warm paper tones) so the wordmark and screenshots sit flush
+     against the page instead of showing a visible box around them. */
+  --background: #fafafa;
+  --foreground: #18181b;
+
+  /* Cornell red. One accent, used the same way everywhere. */
+  --color-red: #d12c2c;
+  --color-red-dim: #b31b1b;
+
+  --color-heading: #18181b;
+  --color-body: #52525b;
+  --color-body-light: #71717a;
+
+  --color-surface: #f7f7f8;
+  --color-surface-hero: #f7f7f8;
+  --color-line: #e4e4e7;
+
+  --color-ink: #0c0c0e;
+  --color-ink-elevated: #17171a;
+  --color-ink-line: rgba(250, 250, 250, 0.12);
+  --color-paper: #fafafa;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+
+  --color-red: var(--color-red);
+  --color-red-dim: var(--color-red-dim);
+
+  --color-heading: var(--color-heading);
+  --color-body: var(--color-body);
+  --color-body-light: var(--color-body-light);
+
+  --color-surface: var(--color-surface);
+  --color-surface-hero: var(--color-surface-hero);
+  --color-border: var(--color-line);
+  --color-line: var(--color-line);
+
+  --color-ink: var(--color-ink);
+  --color-ink-elevated: var(--color-ink-elevated);
+  --color-ink-border: var(--color-ink-line);
+  --color-paper: var(--color-paper);
+
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-}
+  --font-serif: var(--font-zilla-slab);
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  --radius-none: 0px;
+
+  --animate-fade-in: fade-in 0.6s ease-out both;
+  --animate-fade-in-up: fade-in-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+  --animate-marquee: marquee 40s linear infinite;
+  --animate-accordion-down: accordion-down 0.25s ease-out;
+  --animate-accordion-up: accordion-up 0.25s ease-out;
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  @keyframes fade-in-up {
+    from {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+  @keyframes accordion-down {
+    from {
+      height: 0;
+    }
+    to {
+      height: var(--radix-accordion-content-height);
+    }
+  }
+  @keyframes accordion-up {
+    from {
+      height: var(--radix-accordion-content-height);
+    }
+    to {
+      height: 0;
+    }
   }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+::selection {
+  background: var(--color-red);
+  color: var(--color-paper);
+}
+
+.text-balance {
+  text-wrap: balance;
+}
+
+.text-pretty {
+  text-wrap: pretty;
+}
+
+/* Tabular figures for stats, dates, and other technical data */
+.font-mono,
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Zilla Slab display type: a slab serif reads structured and a little
+   technical rather than literary, closer to what a dev club is. */
+.font-serif {
+  font-family: var(--font-zilla-slab), Georgia, serif;
+  line-height: 1.1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
